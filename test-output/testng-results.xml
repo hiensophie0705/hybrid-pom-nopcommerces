@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="User Nopcommerce" duration-ms="78" started-at="2021-05-13T18:05:09Z" finished-at="2021-05-13T18:05:09Z">
+    <groups>
+    </groups>
+    <test name="Run on Chrome" duration-ms="78" started-at="2021-05-13T18:05:09Z" finished-at="2021-05-13T18:05:09Z">
+      <class name="com.nopcommerces.user.User_01_Register_Login">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.nopcommerces.user.User_01_Register_Login@5dfcfece]" name="beforeClass" is-config="true" duration-ms="16" started-at="2021-05-13T18:05:09Z" finished-at="2021-05-13T18:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="TC_01_Register_Empty_Data()[pri:0, instance:com.nopcommerces.user.User_01_Register_Login@5dfcfece]" name="TC_01_Register_Empty_Data" duration-ms="9" started-at="2021-05-13T18:05:09Z" finished-at="2021-05-13T18:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_01_Register_Empty_Data -->
+        <test-method status="PASS" signature="TC_02_Invalid_Email()[pri:0, instance:com.nopcommerces.user.User_01_Register_Login@5dfcfece]" name="TC_02_Invalid_Email" duration-ms="2" started-at="2021-05-13T18:05:09Z" finished-at="2021-05-13T18:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_02_Invalid_Email -->
+        <test-method status="PASS" signature="TC_03_Register_()[pri:0, instance:com.nopcommerces.user.User_01_Register_Login@5dfcfece]" name="TC_03_Register_" duration-ms="4" started-at="2021-05-13T18:05:09Z" finished-at="2021-05-13T18:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_03_Register_ -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.nopcommerces.user.User_01_Register_Login@5dfcfece]" name="afterClass" is-config="true" duration-ms="0" started-at="2021-05-13T18:05:09Z" finished-at="2021-05-13T18:05:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.nopcommerces.user.User_01_Register_Login -->
+    </test> <!-- Run on Chrome -->
+  </suite> <!-- User Nopcommerce -->
+</testng-results>
