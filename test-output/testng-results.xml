@@ -1,25 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="2" total="3" passed="1">
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="13559" started-at="2021-05-13T18:42:18Z" finished-at="2021-05-13T18:42:32Z">
+  <suite started-at="2022-09-21T16:49:58Z" name="Default suite" finished-at="2022-09-21T16:50:23Z" duration-ms="25061">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="13559" started-at="2021-05-13T18:42:18Z" finished-at="2021-05-13T18:42:32Z">
-      <class name="com.nopcommerces.user.User_01_Register_Login">
-        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.nopcommerces.user.User_01_Register_Login@100fc185]" name="beforeClass" is-config="true" duration-ms="13441" started-at="2021-05-13T18:42:18Z" finished-at="2021-05-13T18:42:32Z">
+    <test started-at="2022-09-21T16:49:58Z" name="Default test" finished-at="2022-09-21T16:50:23Z" duration-ms="25061">
+      <class name="com.nopcommerces.user.User_03_My_Account">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.nopcommerces.user.User_03_My_Account@4816278d]" started-at="2022-09-21T16:49:58Z" name="beforeClass" finished-at="2022-09-21T16:50:02Z" duration-ms="4189" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method status="PASS" signature="TC_01_Register_Empty_Data()[pri:0, instance:com.nopcommerces.user.User_01_Register_Login@100fc185]" name="TC_01_Register_Empty_Data" duration-ms="12" started-at="2021-05-13T18:42:32Z" finished-at="2021-05-13T18:42:32Z">
+        <test-method signature="TC_01_Register_Completed()[pri:0, instance:com.nopcommerces.user.User_03_My_Account@4816278d]" started-at="2022-09-21T16:50:02Z" name="TC_01_Register_Completed" finished-at="2022-09-21T16:50:05Z" duration-ms="3360" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_01_Register_Empty_Data -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.nopcommerces.user.User_01_Register_Login@100fc185]" name="afterClass" is-config="true" duration-ms="4" started-at="2021-05-13T18:42:32Z" finished-at="2021-05-13T18:42:32Z">
+        </test-method> <!-- TC_01_Register_Completed -->
+        <test-method signature="TC_02_Login_Success()[pri:0, instance:com.nopcommerces.user.User_03_My_Account@4816278d]" started-at="2022-09-21T16:50:05Z" name="TC_02_Login_Success" finished-at="2022-09-21T16:50:08Z" duration-ms="2453" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_02_Login_Success -->
+        <test-method signature="TC_03_Update_CustomerInfo()[pri:0, instance:com.nopcommerces.user.User_03_My_Account@4816278d]" started-at="2022-09-21T16:50:08Z" name="TC_03_Update_CustomerInfo" finished-at="2022-09-21T16:50:11Z" duration-ms="2630" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_03_Update_CustomerInfo -->
+        <test-method signature="TC_04_Update_Addresses()[pri:0, instance:com.nopcommerces.user.User_03_My_Account@4816278d]" started-at="2022-09-21T16:50:11Z" name="TC_04_Update_Addresses" finished-at="2022-09-21T16:50:13Z" duration-ms="2924" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_04_Update_Addresses -->
+        <test-method signature="TC_05_Change_Password()[pri:0, instance:com.nopcommerces.user.User_03_My_Account@4816278d]" started-at="2022-09-21T16:50:13Z" name="TC_05_Change_Password" finished-at="2022-09-21T16:50:18Z" duration-ms="4872" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_05_Change_Password -->
+        <test-method signature="TC_06_My_Product_Review()[pri:0, instance:com.nopcommerces.user.User_03_My_Account@4816278d]" started-at="2022-09-21T16:50:18Z" name="TC_06_My_Product_Review" finished-at="2022-09-21T16:50:23Z" duration-ms="4611" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_06_My_Product_Review -->
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.nopcommerces.user.User_03_My_Account@4816278d]" started-at="2022-09-21T16:50:23Z" name="afterClass" finished-at="2022-09-21T16:50:23Z" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-      </class> <!-- com.nopcommerces.user.User_01_Register_Login -->
+      </class> <!-- com.nopcommerces.user.User_03_My_Account -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
