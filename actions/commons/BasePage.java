@@ -1,8 +1,10 @@
 package commons;
 
+import java.util.Collections;
 import java.util.List;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -19,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 	WebDriver driver;
+	
 //là tầng dành riêng để build ra common function nào đó(class hay package nào đó)
 	//Action:click /open/ sendkey/select/.. -->void
 	public void openPageUrl(WebDriver driver,String pageUrl) {
@@ -105,7 +108,8 @@ public class BasePage {
 	public WebElement getWebElement(WebDriver driver, String locator) {
 		return driver.findElement(getByXpath(locator));
 	}
-	public List<WebElement> getWebElements(WebDriver driver,String locator){
+	
+	public List<WebElement> getListWebElements(WebDriver driver,String locator){
 		return driver.findElements(getByXpath(locator));
 	}
 	
@@ -171,7 +175,7 @@ public class BasePage {
 		return getWebElement(driver,locator).getCssValue(value);
 	}
 	public int getElementSize(WebDriver driver, String locator) {
-		return getWebElements(driver,locator).size();
+		return getListWebElements(driver,locator).size();
 	}
 	public void checkToCheckboxRadio(WebDriver driver, String locator) {
 		if(!getWebElement(driver,locator).isSelected()) {
@@ -183,10 +187,9 @@ public class BasePage {
 			waitForElementClickAble(driver,locator).click();
 		}
 	}
-	
 	public boolean isElementDisplayed(WebDriver driver, String locator) {
 		return waitForElementVisible(driver,locator).isDisplayed();
-	}
+	}			
 	public boolean isElementEnabled(WebDriver driver, String locator) {
 		return waitForElementVisible(driver,locator).isEnabled();
 	}
@@ -196,11 +199,9 @@ public class BasePage {
 	public void switchToFrame(WebDriver driver, String locator) {
 		driver.switchTo().frame(getWebElement(driver,locator));
 	}
-	
 	public void switchToDefaultPage(WebDriver driver) {
 		driver.switchTo().defaultContent();
 	}
-	
 	public void doubleClickToElement(WebDriver driver, String locator) {
 		action = new Actions(driver);
 		action.doubleClick(getWebElement(driver,locator)).perform();
@@ -209,12 +210,10 @@ public class BasePage {
 		action = new Actions(driver);
 		action.contextClick(getWebElement(driver,locator)).perform();
 	}
-	
 	public void rightClickToElement(WebDriver driver, String sourceLocator,String targetLocator) {
 		action = new Actions(driver);
 		action.dragAndDrop(getWebElement(driver,sourceLocator),getWebElement(driver,targetLocator)).perform();
 	}
-	
 	public void sendkeyBoardToElement(WebDriver driver, String locator, Keys key) {
 		action = new Actions(driver);
 		action.sendKeys(getWebElement(driver,locator),key).perform();
@@ -309,7 +308,8 @@ public class BasePage {
 		jsExecutor = (JavascriptExecutor) driver;
 		return (String) jsExecutor.executeScript("return arguments[0].validationMessage;", getWebElement(driver, locator));
 	}
-
+	
+	
 	public boolean isImageLoaded(WebDriver driver, String locator) {
 		jsExecutor = (JavascriptExecutor) driver;
 		boolean status = (boolean) jsExecutor.executeScript("return arguments[0].complete && typeof "
@@ -329,14 +329,54 @@ public class BasePage {
 		explicitWait = new WebDriverWait(driver,longTimeout);
 		return explicitWait.until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));
 	}
-	public boolean waitForElementInvisible(WebDriver driver,String locator) {
-		explicitWait = new WebDriverWait(driver,longTimeout);
-		return explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(getByXpath(locator)));
+	public void waitForElementInvisible(WebDriver driver, String locator) {
+		try {
+			overideTimeout(shortTimeout);
+			explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locator)));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			overideTimeout(longTimeout);
+		}
 	}
+	public void overideTimeout(long timeout) {
+		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);	
+	}
+	
+	public boolean isElementInvisible(WebDriver driver, String locator) {
+		overideTimeout(shortTimeout);
+		List<WebElement> elements = driver.findElements(By.xpath(locator));
+		overideTimeout(longTimeout);
+		if(elements.size() == 0) {
+			System.out.print("3: element không có trong DOM = không có trên UI");
+			return true;
+		} else if(elements.size() > 0 && !elements.get(0).isDisplayed()) {
+			System.out.println("2: Element có trong DOM nhưng không có trên UI");
+			return true;
+		} else {
+			System.out.println("1: Element có trong DOM và có trên UI");
+			return false;
+		}
+	}
+	public boolean isElementDisplayed(String locator) {
+		try {
+			WebElement element = driver.findElement(By.xpath(locator));
+			return element.isDisplayed();
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+
+	
+	
+	
 	
 	private WebDriverWait explicitWait;
 	private JavascriptExecutor jsExecutor;
-	private long longTimeout = 30;
+	private long shortTimeout = 5;
+	private long longTimeout = 10;
 	private Actions action;
 	private Alert alert;
 	private Select select;

@@ -5,6 +5,8 @@ import java.util.Random;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import pageObjects.HomePageObject;
@@ -12,11 +14,13 @@ import pageObjects.LoginPageObject;
 import pageObjects.MyAccountPageObject;
 import pageObjects.MyHomePageObject;
 import pageObjects.RegisterPageObject;
+import pageObjects.SearchPageObject;
 
 public class User_04_Search {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
-	String firstname,lastname, day,month,year, email,password;
+	String firstname,lastname, day,month,year, email,password,category,manufacturer;
+	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
@@ -29,6 +33,9 @@ public class User_04_Search {
 		year = "1997";
 		email = generateEmail();
 		password ="123456";
+		category ="Computers";
+		manufacturer ="HP";
+		
 	}
 	@Test
 	public void TC_01_Register_Completed() {
@@ -67,32 +74,81 @@ public class User_04_Search {
 		myHomePage = new MyHomePageObject(driver);
 		Assert.assertTrue(myHomePage.isLogoutButtonDisplayed());
 	}
-	public void TC_01_Search_with_empty_data() {
+	@Test
+	public void TC_03_Search_with_empty_data() {
+		myHomePage.clickToSearchLink();
+		
+		searchPage = new SearchPageObject(driver);
+		Assert.assertTrue(searchPage.isTitleSearchDisplayed());
+		
+		searchPage.clickSearchButton(); 
+		Assert.assertTrue(searchPage.isEmptyDataErrorMessageDisplayed());
+		
 		
 	}
+	@Test
+	public void TC_04_Search_with_data_not_exist() {
+		searchPage.inputSearchTextbox("xyz");
+		searchPage.clickSearchButton();
+		Assert.assertTrue(searchPage.isDataNotExistErrorMessageDisplayed());
+	}
+	@Test
+	public void TC_05_Search_with_product_name_tuong_doi(){
+		searchPage.inputSearchTextbox("Lenovo");
+		searchPage.clickSearchButton();
+		Assert.assertTrue(searchPage.isLenovoThinkpadX1CarbonLaptopDisplayed());
+		Assert.assertTrue(searchPage.isLenovoIdeaCentre600AllInOnePCDisplayed());
+	}
+	@Test
+	public void TC_06_Search_with_product_name_tuyet_doi() {
+		searchPage.inputSearchTextbox("ThinkPad X1 Carbon");
+		searchPage.clickSearchButton();
+		Assert.assertTrue(searchPage.isLenovoThinkpadX1CarbonLaptopDisplayed());
+		
+	}
+	@Test
+	public void TC_07_Advanced_Search_with_Parent_categories() {
+		searchPage.inputSearchTextbox("Apple Macbook Pro");
+		searchPage.clickAdvancedSearchCheckbox();
+		searchPage.selectCategory(category);
+		searchPage.clickSearchButton();
+		Assert.assertTrue(searchPage.isDataNotExistErrorMessageDisplayed());
+		
+	}
+	@Test
+	public void TC_08_Advanced_Search_with_sub_categories() {
+		
+//		searchPage.inputSearchTextbox("Apple Macbook Pro");
+//		
+//		searchPage.clickAdvancedSearchCheckbox();
+//		searchPage.selectCategory(category);
+		searchPage.clickAutomaticallySearchSubCategoriesCheckbox();
+		searchPage.clickSearchButton();
+		Assert.assertTrue(searchPage.isAppleMacbookPro13inchDisplayed());
 	
-	public void TC_02_Search_with_data_not_exist() {
+	}
+	@Test
+	public void TC_09_Advanced_Search_Incorrect_manufacturer() {
+//		searchPage.inputSearchTextbox("Apple Macbook Pro");
+//		searchPage.clickAdvancedSearchCheckbox();
+//		searchPage.selectCategory(category);
+//		searchPage.clickAutomaticallySearchSubCategoriesCheckbox();
+		searchPage.selectManufacturer(manufacturer);
+		searchPage.clickSearchButton();
+		Assert.assertTrue(searchPage.isDataNotExistErrorMessageDisplayed());
+	}
+	@Test
+	public void TC_10_Advanced_Search_correct_manufacturer() {
+//		searchPage.inputSearchTextbox("Apple Macbook Pro");
+//		searchPage.clickAdvancedSearchCheckbox();
+//		searchPage.selectCategory(category);
+//		searchPage.clickAutomaticallySearchSubCategoriesCheckbox();
+		searchPage.selectManufacturer("Apple");
+		searchPage.clickSearchButton();
+		Assert.assertTrue(searchPage.isAppleMacbookPro13inchDisplayed());
 		
 	}
-	public void TC_03_Search_with_product_name_tuong_doi(){
-		
-	}
-	public void TC_04_Search_with_product_name_tuyet_doi() {
-		
-	}
-
-	public void TC_05_Advanced_Search_with_Parent_categories() {
-		
-	}
-	public void TC_06_Advanced_Search_with_sub_categories() {
-		
-	}
-	public void TC_07_Advanced_Search_Incorrect_manufacturer() {
-		
-	}
-	public void TC_08_Advanced_Search_correct_manufacturer() {
-
-	}
+	@AfterClass
 	public void afterClass() {
 		
 	}
@@ -106,4 +162,5 @@ public class User_04_Search {
 	LoginPageObject loginPage;	
 	MyHomePageObject myHomePage;
 	MyAccountPageObject myAccountPage;
+	SearchPageObject searchPage;
 }
